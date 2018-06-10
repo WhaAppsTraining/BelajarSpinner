@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +14,6 @@ import butterknife.BindView;
 import sembarang.belajarspinner.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String BASE_URL = "http://test.com";
 
     // memakai butterknife
     @BindView(R.id.spinner)
@@ -30,12 +26,6 @@ public class MainActivity extends AppCompatActivity {
         // setContentView(R.layout.activity_main);
         // ButterKnife.bind(this);
         // spinner.setAdapter(getAdapter());
-
-        forceClose();
-
-        String url = BASE_URL + "/123";
-
-        Toast.makeText(this, url, Toast.LENGTH_LONG).show();
 
         // memakai data binding
         ActivityMainBinding activityMainBinding =
@@ -52,24 +42,14 @@ public class MainActivity extends AppCompatActivity {
         // secara dinamis dari request API(request om Reno)
     }
 
-    private void forceClose() {
-        String text = getStringFromAPI();
-        TextView textView = null;
-        textView.setText(text);
-        setContentView(textView);
-    }
-
-    private String getStringFromAPI() {
-        return null;
-    }
-
     // Mendapatkan adapter yang akan diset ke spinner
     private ArrayAdapter getAdapter() {
         ArrayAdapter<String> spinnerAdapter =
                 new ArrayAdapter<>(
                         this,
                         // android.R.layout.simple_spinner_dropdown_item
-                        R.layout.item_spinner
+                        R.layout.item_spinner // Custom layout
+                        // Kalau mau lebih kompleks lagi bisa extends ArrayAdapter atau BaseAdapter langsung
                 );
         spinnerAdapter.addAll(getData());
         return spinnerAdapter;
@@ -88,25 +68,5 @@ public class MainActivity extends AppCompatActivity {
             );
         }
         return data;
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 }
